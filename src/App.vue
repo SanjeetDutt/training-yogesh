@@ -1,45 +1,38 @@
 <template>
-    <h1>Hello world !! {{name}}</h1>
-    <h2>{{count}}</h2>
-
-    <p v-html="text" :class="textClass"></p>
-
-    <p v-bind="attrBind">This is a dynamic paragraph</p>
-
-    <div></div>
-
-    <ul>
-        <li v-for="name in names">{{name}}</li>
-    </ul>
+    <h1 :class="computedClass">{{count}}</h1>
+    <button v-on:click="clickFunction">CLICK ME</button>
+    <button v-on:click="clickFunction2">CLICK ME to reduce</button>
 </template>
 
 <script>
+// click => ++
+// style binding
 
 export default {
     name:"mainComp",
     data(){
         return {
             count : 1,
-            name:{
-                fName: "sanjeet",
-                lastName:"Dutt"
-            },
-            names:[
-                "SANJEET","YOGESH","Srinivas"
-            ],
-            text:"<b>THis is error</b>",
-            textClass:"green",
-
-            attrBind:{
-                class:"red",
-                id:"my-dynamic-p",
-                title:"my dynamic paragraph"
-            }
         }
     },
     methods:{
-        click(){
-            alert("HELLO")
+        clickFunction(){
+            this.count++;
+
+        },
+        clickFunction2(){
+            this.count--;
+
+        }
+    },
+
+    computed:{
+        computedClass(){
+            console.log("MY COMPUTED PROPERTY TRIGGERED")
+            if(this.count % 2 === 0)
+                return "red"
+            else
+                return "green"
         }
     }
 
